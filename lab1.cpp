@@ -263,7 +263,7 @@ void render()
 #ifdef Test1
 	glColor3f(g.r, g.g, g.b);
 #else 
-	glColor3ub(255, 160, 220);
+	glColor3ub(150, 160, 220);
 #endif
 
 	glTranslatef(pos[0], pos[1], 0.0f);
@@ -277,7 +277,6 @@ void render()
 	pos[0] += dir;
 	if (pos[0] >= (g.xres-w)) {
 		pos[0] = (g.xres-w);
-		glColor3ub(255, 0, 0);
 		dir = -dir;
 
 	}
