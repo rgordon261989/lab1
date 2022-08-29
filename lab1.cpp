@@ -23,6 +23,9 @@ using namespace std;
 class Global {
 public:
 	int xres, yres;
+#ifdef Test1
+	float r,g,b;
+#endif
 	Global();
 } g;
 
@@ -79,6 +82,10 @@ Global::Global()
 {
 	xres = 400;
 	yres = 200;
+	#ifdef Test1
+	r = 1.0;
+	g = 0.6;
+#endif
 }
 
 X11_wrapper::~X11_wrapper()
@@ -253,7 +260,12 @@ void render()
 	glClear(GL_COLOR_BUFFER_BIT);
 	//Draw box.
 	glPushMatrix();
-	glColor3ub(150, 160, 220);
+#ifdef Test1
+	glColor3f(g.r, g.g, g.b);
+#else 
+	glColor3ub(255, 160, 220);
+#endif
+
 	glTranslatef(pos[0], pos[1], 0.0f);
 	glBegin(GL_QUADS);
 		glVertex2f(-w, -w);
@@ -265,7 +277,9 @@ void render()
 	pos[0] += dir;
 	if (pos[0] >= (g.xres-w)) {
 		pos[0] = (g.xres-w);
+		glColor3ub(255, 0, 0);
 		dir = -dir;
+
 	}
 	if (pos[0] <= w) {
 		pos[0] = w;
